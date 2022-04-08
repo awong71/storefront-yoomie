@@ -1,22 +1,33 @@
+import { ProductCard } from '../components/ProductCard';
 import {PageTitle} from './../components/PageTitle'
 
-function ProductCard ({name, key, ...props}){
-  return <li>{name}</li>
-}
 
 
+// https://yoomieco-75413-default-rtdb.firebaseio.com/products.json
 
 
-
-export default function Home() {
+export default function Home(props) {
   
+  const products = props.products;
+
 
   return (
     <>
-    <PageTitle title="storefront" tagline="featured products"/>
-    {
-      productData.map((uid, name) => <ProductCard key={uid} name={name}/>)
-    }
+    <PageTitle tagline="product specials" title="Storefront"/>
+    <main>
+    { products.map(product=> <ProductCard key={product.uid} product={product}/>)}
+    </main>
     </>
   )
+}
+
+export async function getStaticProps(){
+  const res = await fetch('https://yoomieco-75413-default-rtdb.firebaseio.com/products.json')
+  const productData = await res.json();
+  const products = Object.values(productData)
+  return {
+    props:{
+      products
+    }
+  }
 }
