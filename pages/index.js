@@ -1,4 +1,7 @@
 import Head from 'next/head'
+
+import { loadStripe } from '@stripe/stripe-js';
+
 import { ProductCard } from '../components/ProductCard';
 import {PageTitle} from './../components/PageTitle'
 
@@ -9,8 +12,10 @@ import {PageTitle} from './../components/PageTitle'
 
 export default function Home(props) {
   
-  const products = props.products;
+  const products = props.products.slice(0,3);
 
+
+  const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY)
 
   return (
     <>

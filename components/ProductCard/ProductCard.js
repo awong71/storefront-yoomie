@@ -22,8 +22,8 @@ function ProductCard ({children, product, ...props})  {
            <p className={description}>{productDescription}</p>
            
            <footer>
-          <form action='#' method='POST'>
-            <input type="hidden" name='uid' value={uid}/>
+          <form action="/api/checkout" method="POST">
+            <input type="hidden" name="uid" value={uid}/>
             <button type="submit">Buy Now</button>
           </form>
          </footer>
